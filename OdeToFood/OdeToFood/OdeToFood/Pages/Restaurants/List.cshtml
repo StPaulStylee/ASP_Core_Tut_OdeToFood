@@ -30,9 +30,12 @@
             <td>@restaruant.Cuisine</td>
             <td>
                 @* Go to the detail page and pass/route this parameter with the request to get the page
-                    The asp-route-... must match the parameter name given in the OnGet method of the model*@
+        The asp-route-... must match the parameter name given in the OnGet method of the model*@
                 <a class="btn btn-lg" asp-page="./Detail" asp-route-restaurantId="@restaruant.Id">
                     <i class="glyphicon glyphicon-zoom-in"></i>
+                </a>
+                <a class="btn btn-lg" asp-page="./Edit" asp-route-restaurantId="@restaruant.Id">
+                    <i class="glyphicon glyphicon-edit"></i>
                 </a>
             </td>
         </tr>
