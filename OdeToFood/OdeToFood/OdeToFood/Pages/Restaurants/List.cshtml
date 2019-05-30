@@ -10,7 +10,9 @@
 <form method="get">
     <div class="form-group">
         <div class="input-group">
-            <input type="search" class="form-control" value=""  name="searchTerm"/>
+            @* The asp-for attr is like two way data binding. It sets the name of the input using the provided
+                model property (ListModel.SearchTerm) as well as the value for the input and model using the value of the bound property*@
+            <input type="search" class="form-control"  asp-for="SearchTerm"/>
             <span class="input-group-btn">
                 <button class="btn btn-default">
                     <i class="glyphicon glyphicon-search"></i>

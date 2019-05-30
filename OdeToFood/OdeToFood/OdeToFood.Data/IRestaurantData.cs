@@ -24,13 +24,19 @@ namespace OdeToFood.Data
                 new Restaurant { Id = 3, Name = "Graham's Crackers", Location = "Minneapolis, MN", Cuisine = CuisineType.Mexican}
             };
         }
-        // The parameter is option becaue of the default value of null
+        // The parameter is optional becaue of the default value of null
         public IEnumerable<Restaurant> GetRestaurantsByName(string name = null)
         {
-            return Restaurants.Select(r => r)
-                .Where(string.IsNullOrEmpty(name) || (r) => r.Name.StartsWith(name))
+            if (name == null)
+            {
+                return Restaurants.Select(r => r)
                 .OrderBy(r => r.Id)
                 .ToList();
+            }
+            return Restaurants.Select(r => r)
+            .Where(r => r.Name.StartsWith(name))
+            .OrderBy(r => r.Id)
+            .ToList();
         } 
     }
 }
