@@ -19,9 +19,18 @@ namespace OdeToFood.Pages.Restaurants
         }
 
         public Restaurant Restaurant { get; set; }
-        public void OnGet(int restaurantId)
+        // Setting the return type to IActionResult lets us decide what pages to show depending on what our
+        // logic determines
+        public IActionResult OnGet(int restaurantId)
         {
             Restaurant = restaurantData.GetById(restaurantId);
+            // If restaurant is not found, redirect to the not found page
+            if (Restaurant == null)
+            {
+                return RedirectToPage("./NotFound");
+            }
+            // Otherwise render the related view (Detail.cshtml)
+            return Page();
         }
     }
 }
