@@ -1,6 +1,6 @@
 ﻿@* This change to the page property sets the route for the details page to /Restaurants/Detail/{restaurantId}
     the ~:int requires that this parameter be parsible into an int*@
-@page "{restaurantId:int}/{restaurantLocation}"
+@page "{restaurantId:int}"
 @model OdeToFood.Pages.Restaurants.DetailModel
 @{
     ViewData["Title"] = "Detail";

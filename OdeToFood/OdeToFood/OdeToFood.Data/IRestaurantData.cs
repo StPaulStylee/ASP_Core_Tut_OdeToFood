@@ -9,6 +9,7 @@ namespace OdeToFood.Data
     public interface IRestaurantData
     {
         IEnumerable<Restaurant> GetRestaurantsByName(string name);
+        Restaurant GetById(int id);
     }
 
     // This will be for development only; setting us up to easily tranfser this to DB access
@@ -37,6 +38,12 @@ namespace OdeToFood.Data
             .Where(r => r.Name.StartsWith(name))
             .OrderBy(r => r.Id)
             .ToList();
-        } 
+        }
+
+        // Returns a restaurant that has the given id or the default, which is null
+        public Restaurant GetById(int id)
+        {
+            return Restaurants.SingleOrDefault(restaurant => restaurant.Id == id);
+        }
     }
 }
