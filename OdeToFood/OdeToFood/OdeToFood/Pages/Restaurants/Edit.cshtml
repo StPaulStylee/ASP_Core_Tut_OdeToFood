@@ -6,3 +6,28 @@
 
 <h2>Editing @Model.Restaurant.Name</h2>
 
+<form method="post">
+    <input type="hidden" asp-for="Restaurant.Id" />
+    <div class="form-group">
+        <label asp-for="Restaurant.Name"></label>
+        @* We don't need to set the type of this input as asp-for infers it from the bound property
+            It knows that Restaurant.Name is a string and sets the input to type of text*@
+        <input asp-for="Restaurant.Name" class="form-control" />
+        @* asp-validation-for works with our data attributes on our Restaurant model
+            If something is invalid, it will display a message*@
+        <span class="text-danger" asp-validation-for="Restaurant.Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Restaurant.Location"></label>
+        <input asp-for="Restaurant.Location" class="form-control" />
+        <span class="text-danger" asp-validation-for="Restaurant.Location"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Restaurant.Cuisine"></label>
+        @* asp-items is different in that it can't assume the data it is binding to is coming from the model
+            So you must specify that using the Model.{} syntax*@
+        <select asp-for="Restaurant.Cuisine" class="form-control" asp-items="Model.Cuisines">
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
