@@ -73,6 +73,9 @@ namespace OdeToFood.Pages.Restaurants
                 restaurantData.Create(Restaurant);
             }
             restaurantData.Commit();
+            // THis data is available ONLY DURING THE NEXT REQUEST... This allows the details page to look for it 
+            // and render accordingly 
+            TempData["Message"] = "Restaurant saved!";
             // On a successful post, redirect the user to the newly created restaurant's details page
             // here, we are creating a new anonymous object to indicate the id for routing
             // This is known as the 'POST-GET-Redirect Pattern

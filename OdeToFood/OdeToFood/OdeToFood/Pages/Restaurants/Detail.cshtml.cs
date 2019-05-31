@@ -13,6 +13,10 @@ namespace OdeToFood.Pages.Restaurants
     {
         private readonly IRestaurantData restaurantData;
 
+        // This attribute allows the Message property to be set if there is TempData available
+        // We can then check for this in our view 
+        [TempData]
+        public string Message { get; set; }
         public DetailModel(IRestaurantData restaurantData)
         {
             this.restaurantData = restaurantData;
