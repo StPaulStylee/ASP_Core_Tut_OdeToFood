@@ -61,6 +61,7 @@ namespace OdeToFood.Data
             return restaurant;
         }
 
+        // What does this do?
         public int Commit()
         {
             return 0;

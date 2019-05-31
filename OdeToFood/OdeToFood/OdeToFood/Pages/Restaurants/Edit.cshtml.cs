@@ -56,18 +56,27 @@ namespace OdeToFood.Pages.Restaurants
 
         public IActionResult OnPost()
         {
-            if(ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
                 // Don't forget that these Cuisines need to be populated on every type of HTTP request
                 // This is because ASP.NetCore is stateless - you are responsible for setting up your state!
                 Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
+                return Page();
+            }
+            // This if/else is checking if the Restaurant has an ID.. if it does, then it is an edit... If it doesn't, then it's a new restaurant
+            if (Restaurant.Id > 0)
+            {
                 restaurantData.Update(Restaurant);
+            }
+            else
+            {
+                restaurantData.Create(Restaurant);
             }
             restaurantData.Commit();
             // On a successful post, redirect the user to the newly created restaurant's details page
             // here, we are creating a new anonymous object to indicate the id for routing
             // This is known as the 'POST-GET-Redirect Pattern
-            return RedirectToPage("./Detail", new {  restaurantId = Restaurant.Id});
+            return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
         }
     }
 }
