@@ -12,7 +12,7 @@
         <div class="input-group">
             @* The asp-for attr is like two way data binding. It sets the name of the input using the provided
                 model property (ListModel.SearchTerm) as well as the value for the input and model using the value of the bound property*@
-            <input type="search" class="form-control"  asp-for="SearchTerm"/>
+            <input type="search" class="form-control" asp-for="SearchTerm" />
             <span class="input-group-btn">
                 <button class="btn btn-default">
                     <i class="glyphicon glyphicon-search"></i>
@@ -22,7 +22,7 @@
     </div>
 </form>
 <table class="table">
-    @foreach(var restaruant in Model.Restaurants)
+    @foreach (var restaruant in Model.Restaurants)
     {
         <tr>
             <td>@restaruant.Name</td>
@@ -30,7 +30,7 @@
             <td>@restaruant.Cuisine</td>
             <td>
                 @* Go to the detail page and pass/route this parameter with the request to get the page
-        The asp-route-... must match the parameter name given in the OnGet method of the model*@
+                    The asp-route-... must match the parameter name given in the OnGet method of the model*@
                 <a class="btn btn-lg" asp-page="./Detail" asp-route-restaurantId="@restaruant.Id">
                     <i class="glyphicon glyphicon-zoom-in"></i>
                 </a>
@@ -41,6 +41,7 @@
         </tr>
     }
 </table>
+<a class="btn btn-primary" asp-page="./Edit">Add New</a>
 <div>
     @Model.Message
 </div>

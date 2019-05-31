@@ -1,4 +1,6 @@
-﻿@page "{restaurantId:int}"
+﻿@* The '?' at the end means that it is an optional parameter, we do this
+    So we can reuse this page in "Create" scenarios*@
+@page "{restaurantId:int?}"
 @model OdeToFood.Pages.Restaurants.EditModel
 @{
     ViewData["Title"] = "Edit";

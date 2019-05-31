@@ -28,12 +28,23 @@ namespace OdeToFood.Pages.Restaurants
             this.restaurantData = restaurantData;
             this.htmlHelper = htmlHelper;
         }
-        public IActionResult OnGet(int restaurantId)
+
+        // The '?' on the type declaration of the parameter means that it can be null
+
+        public IActionResult OnGet(int? restaurantId)
         {
             // Don't forget that these Cuisines need to be populated on every type of HTTP request
             // This is because ASP.NetCore is stateless - you are responsible for setting up your state!
             Cuisines = htmlHelper.GetEnumSelectList<CuisineType>();
-            Restaurant = restaurantData.GetById(restaurantId);
+            if (restaurantId.HasValue)
+            {
+                // Since we're using a nullable operator, we have to use .HasValue and if it does, use .Value to get it
+                Restaurant = restaurantData.GetById(restaurantId.Value);
+            }
+            else
+            {
+                Restaurant = new Restaurant();
+            }
             // If restaurant is not found, redirect to the not found page
             if (Restaurant == null)
             {
@@ -53,8 +64,10 @@ namespace OdeToFood.Pages.Restaurants
                 restaurantData.Update(Restaurant);
             }
             restaurantData.Commit();
-            return Page();
-            //return RedirectToPage("./List");
+            // On a successful post, redirect the user to the newly created restaurant's details page
+            // here, we are creating a new anonymous object to indicate the id for routing
+            // This is known as the 'POST-GET-Redirect Pattern
+            return RedirectToPage("./Detail", new {  restaurantId = Restaurant.Id});
         }
     }
 }
