@@ -11,6 +11,7 @@ namespace OdeToFood.Data
         IEnumerable<Restaurant> GetRestaurantsByName(string name);
         Restaurant GetById(int id);
         Restaurant Update(Restaurant updatedRestaurant);
+        Restaurant Create(Restaurant newRestaurant);
         int Commit();
     }
 
@@ -63,6 +64,16 @@ namespace OdeToFood.Data
         public int Commit()
         {
             return 0;
+        }
+
+        public Restaurant Create(Restaurant newRestaurant)
+        {
+            Restaurants.Add(newRestaurant);
+            // This is for development only to simulate the primary key that would 
+            // be add automatically by SQL Server
+            // This is a LINQ query that finds the highest ID in our list and adds one to it
+            newRestaurant.Id = Restaurants.Max(r => r.Id ) + 1;
+            return newRestaurant;
         }
     }
 }
