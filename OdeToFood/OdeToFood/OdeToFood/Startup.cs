@@ -30,6 +30,9 @@ namespace OdeToFood
             // It says that anything using IRestaurntData, also give them access to the InMemoryRestaurantData
             services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
 
+            // This is our production implementation
+            services.AddScoped<IRestaurantData, SqlRestaurantData>();
+
             // This sets up or OdeToFoodDb context to communicate with our local DB
             // Further, This will allow us to use OdeToFoodDbContext as a parameter in our constructor
             services.AddDbContextPool<OdeToFoodDbContext>(options =>
